@@ -1,16 +1,16 @@
 ﻿# Leetcode 题解 - 树
  - [前中后序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#前中后序遍历)
-	 - [144.二叉树的前序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#144.二叉树的前序遍历)
-	 - [145.二叉树的后序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#145.二叉树的后序遍历)
-	 - [94.二叉树的中序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#94.二叉树的中序遍历)
+	 - [144.二叉树的前序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#144二叉树的前序遍历)
+	 - [145.二叉树的后序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#145二叉树的后序遍历)
+	 - [94.二叉树的中序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#94二叉树的中序遍历)
 - 序列化
 	- 105.从前序与中序遍历序列构造二叉树
 	- 106.从中序与后序遍历序列构造二叉树
 	- 889.根据前序和后序遍历构造二叉树
-- BFS遍历
-	- 513.找树左下角的值
-- DFS遍历
-	- 104.二叉树的最大深度
+- [BFS遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#BFS遍历)
+	- [513.找树左下角的值](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#513找树左下角的值)
+- [DFS遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#DFS遍历)
+	- [104.二叉树的最大深度](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#104二叉树的最大深度)
 
 ## 前中后序遍历
 
@@ -133,5 +133,43 @@ var inorderTraversal = function (root) {
   }
   inorder(root, ans)
   return ans
+}
+```
+## BFS遍历
+#### [513.找树左下角的值](https://leetcode-cn.com/problems/find-bottom-left-tree-value/)
+```javascript
+var findBottomLeftValue = function (root) {
+  let queue = [root]
+  let ans
+  while (queue.length) {
+    let queueLen = queue.length
+    for (let i = 0; i < queueLen; i++) {
+      let cur = queue.shift()
+      if(cur.left) queue.push(cur.left)
+      if(cur.right) queue.push(cur.right)
+      if(i == 0) ans = cur
+    }
+    if(queue.length == 0) return ans.val
+  }
+}
+```
+## DFS遍历
+#### [104.二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
+```javascript
+var maxDepth = function (root) {
+  // 迭代
+  if (!root) return 0
+  let queue = [root]
+  let depth = 0
+  while (queue.length) {
+    let queueLen = queue.length
+    for (let i = 0; i < queueLen; i++) {
+      let cur = queue.shift()
+      if (cur.left) queue.push(cur.left)
+      if (cur.right) queue.push(cur.right)
+    }
+    depth++
+  }
+  return depth
 }
 ```
