@@ -1,8 +1,8 @@
 ﻿# Leetcode 题解 - 树
- - 前中后序遍历
-	 - [144.二叉树的前序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#####144.二叉树的前序遍历)
-	 - 145.二叉树的后序遍历
-	 - 94.二叉树的中序遍历
+ - [前中后序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#前中后序遍历)
+	 - [144.二叉树的前序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#144.二叉树的前序遍历)
+	 - [145.二叉树的后序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#145.二叉树的后序遍历)
+	 - [94.二叉树的中序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#94.二叉树的中序遍历)
 - 序列化
 	- 105.从前序与中序遍历序列构造二叉树
 	- 106.从中序与后序遍历序列构造二叉树
@@ -14,7 +14,7 @@
 
 ## 前中后序遍历
 
-##### [144.二叉树的前序遍历](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/)
+#### [144.二叉树的前序遍历](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/)
 迭代写法
 ```javascript
 var preorderTraversal = function (root) {
@@ -51,7 +51,7 @@ var preorderTraversal = function (root) {
   return ans
 }
 ```
-##### [145.二叉树的后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/)
+#### [145.二叉树的后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/)
 迭代写法
 ```javascript
 var postorderTraversal = function (root) {
@@ -91,7 +91,7 @@ var postorderTraversal = function (root) {
     return ans
 }
 ```
-##### [94.二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+#### [94.二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
 迭代写法
 ```javascript
 var inorderTraversal = function (root) {
