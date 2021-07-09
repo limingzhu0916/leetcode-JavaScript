@@ -1,6 +1,6 @@
 ﻿# Leetcode 题解 - 树
  - 前中后序遍历
-	 - 144.二叉树的前序遍历
+	 - [144.二叉树的前序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#####144.二叉树的前序遍历)
 	 - 145.二叉树的后序遍历
 	 - 94.二叉树的中序遍历
 - 序列化
