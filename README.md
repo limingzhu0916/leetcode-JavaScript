@@ -4,7 +4,7 @@
  题解按照数据结构与算法思想分类。
 ## 数据结构
 * 链表
-* 树
+* [树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-树.md)
 * 栈和队列
 * 哈希表
 * 字符串
