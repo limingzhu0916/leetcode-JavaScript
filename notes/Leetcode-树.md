@@ -9,6 +9,7 @@
 	- 889.根据前序和后序遍历构造二叉树
 - [BFS遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#BFS遍历)
 	- [513.找树左下角的值](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#513找树左下角的值)
+	- [116.填充每个节点的下一个右侧节点指针](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#116填充每个节点的下一个右侧节点指针)
 - [DFS遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#DFS遍历)
 	- [104.二叉树的最大深度](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#104二叉树的最大深度)
 	- [剑指 Offer 34. 二叉树中和为某一值的路径](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#剑指-Offer-34二叉树中和为某一值的路径)
@@ -154,6 +155,63 @@ var findBottomLeftValue = function (root) {
     }
     if(queue.length == 0) return ans.val
   }
+}
+```
+#### [116.填充每个节点的下一个右侧节点指针](https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node/)
+BFS
+```javascript
+var connect = function (root) {
+    if (!root) return null
+    let queue = [root]
+    let last = null
+    let queueLen
+    while (queue.length) {
+        queueLen = queue.length
+        for (let i = 0; i < queueLen; i++) {
+            let cur = queue.shift()
+            if (cur.left) {
+                queue.push(cur.left)
+                queue.push(cur.right)
+            }
+            if (i) {
+                last.next = cur
+            }
+            last = cur
+        }
+    }
+    return root
+}
+```
+利用已经生成的链表遍历，由于不使用队列，可以减少内存空间
+```javascript
+var connect = function (root) {
+    if (!root) return null
+
+    let last = null
+    let startNode = null
+    const handle = (node) => {
+        if (last) {
+            last.next = node
+        }
+        if (!startNode) {
+            startNode = node
+        }
+        last = node
+    }
+
+    let start = root
+    while (start) {
+        startNode = null
+        last = null
+        for (let p = start; p != null; p = p.next) {
+            if (p.left) {
+                handle(p.left)
+                handle(p.right)
+            }
+        }
+        start = startNode
+    }
+    return root
 }
 ```
 ## DFS遍历
