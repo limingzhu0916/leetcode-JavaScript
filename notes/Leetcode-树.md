@@ -11,6 +11,9 @@
 	- [513.找树左下角的值](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#513找树左下角的值)
 - [DFS遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#DFS遍历)
 	- [104.二叉树的最大深度](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#104二叉树的最大深度)
+	- [剑指 Offer 34. 二叉树中和为某一值的路径](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#剑指 Offer 34二叉树中和为某一值的路径)
+- 其他
+	- [1372.二叉树中的最长交错路径](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#1372二叉树中的最长交错路径)
 
 ## 前中后序遍历
 
@@ -171,5 +174,49 @@ var maxDepth = function (root) {
     depth++
   }
   return depth
+}
+```
+#### [剑指 Offer 34. 二叉树中和为某一值的路径](https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/)
+前序遍历+回溯
+```javascript
+var pathSum = function (root, target) {
+    if (!root) return []
+    const dfs = function (root, target, path, res) {
+        if (!root) return
+        // 选择
+        path.push(root.val)
+        // 判断
+        if (!root.left && !root.right && target === root.val) {
+            res.push([...path])
+        } else {
+        	// 递归
+            dfs(root.left, target - root.val, path, res)
+            dfs(root.right, target - root.val, path, res)
+        }
+        // 撤销选择
+        path.pop()
+    }
+    let ans = [], path = []
+    dfs(root, target, path, ans)
+    return ans
+}
+```
+## 其他
+#### [1372.二叉树中的最长交错路径](https://leetcode-cn.com/problems/longest-zigzag-path-in-a-binary-tree/)
+```javascript
+var longestZigZag = function (root) {
+  if (!root) return 0
+  let res = -Infinity
+  // 节点的右拐值 = 1 + 右子节点的左拐值
+  // 节点的左拐值 = 1 + 左子节点的右拐值
+  const dfs = function (root) {
+    if (!root) return [-1, -1]
+    const [ll, lr] = dfs(root.left)
+    const [rl, rr] = dfs(root.right)
+    res = Math.max(res, 1 + lr, 1 + rl)
+    return [1 + lr, 1 + rl]
+  }
+  dfs(root)
+  return res
 }
 ```
