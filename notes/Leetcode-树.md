@@ -17,6 +17,7 @@
 	- [1372.二叉树中的最长交错路径](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#1372二叉树中的最长交错路径)
 	- [863.二叉树中所有距离为 K 的结点](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#863二叉树中所有距离为-K-的结点)
 	- [98.验证二叉搜索树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#98验证二叉搜索树)
+	- [99.恢复二叉搜索树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#99恢复二叉搜索树)
 
 ## 前中后序遍历
 
@@ -356,5 +357,47 @@ var isValidBST = function (root) {
     }
   }
   return true
+}
+```
+#### [99. 恢复二叉搜索树](https://leetcode-cn.com/problems/recover-binary-search-tree/)
+```javascript
+var recoverTree = function(root) {
+  // 题目思路：中序遍历过程中交换错误节点
+  // 题目中提到只有两个节点被交换，因此两个节点要么相邻，要么不相邻
+  let stack = [root]
+  let left = root.left
+  const swap = function (x, y) {
+    // 交换
+    let temp = x.val
+    x.val = y.val
+    y.val = temp
+  }
+  // 左节点先入栈
+  while(left){
+    stack.push(left)
+    left = left.left
+  }
+  let pre = null
+  let x = null, y = null
+  while(stack.length){
+    let cur = stack.pop()
+    if(pre !== null && pre.val > cur.val){
+      y = cur
+      if(!x){
+        x = pre
+      }else{
+        // 遍历到第二个错误节点
+        break
+      }
+    }
+    pre = cur
+    let right = cur.right
+    while(right){
+      stack.push(right)
+      right = right.left
+    }
+  }
+  swap(x, y)
+  return root
 }
 ```
