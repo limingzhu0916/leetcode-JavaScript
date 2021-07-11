@@ -15,6 +15,7 @@
 	- [剑指 Offer 34. 二叉树中和为某一值的路径](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#剑指-Offer-34二叉树中和为某一值的路径)
 - [其他](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#其他)
 	- [1372.二叉树中的最长交错路径](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#1372二叉树中的最长交错路径)
+	- [863.二叉树中所有距离为 K 的结点](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#863二叉树中所有距离为 K 的结点)
 
 ## 前中后序遍历
 
@@ -276,5 +277,55 @@ var longestZigZag = function (root) {
   }
   dfs(root)
   return res
+}
+```
+#### [863.二叉树中所有距离为 K 的结点](https://leetcode-cn.com/problems/all-nodes-distance-k-in-binary-tree/)
+```javascript
+var distanceK = function (root, target, k) {
+  let targetNode = null
+  // 使用递归寻找target值的节点
+  // 并保存目标值的父节点，方便向下查找
+  const findTarget = function (root, target) {
+    if (root.val === target) {
+      targetNode = root
+      return
+    }
+    if (root.left) {
+      root.left.parent = root
+      findTarget(root.left, target)
+    }
+    if (root.right) {
+      root.right.parent = root
+      findTarget(root.right, target)
+    }
+  }
+  findTarget(root, target)
+  // 目标节点向下遍历
+  // path用来保存已经访问过的值
+  let path = []
+  let ans = []
+  const findNode = function (node, k) {
+    // 树遍历完或已经遍历过该节点
+    if (!node || path.indexOf(node.val) !== -1) {
+      return
+    }
+    path.push(node.val)
+    if (k == 0){
+      ans.push(node.val)
+    }else{
+      k--
+      findNode(node.left, k)
+      findNode(node.right, k)
+    }
+  }
+  findNode(targetNode, k)
+  // 从目标节点开始向上遍历
+  while(targetNode.parent && k){
+    targetNode = targetNode.parent
+    // 向上走了一步，k--
+    k--
+    findNode(targetNode, k)
+  }
+  return ans
 }
 ```
