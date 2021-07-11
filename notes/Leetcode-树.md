@@ -16,6 +16,7 @@
 - [其他](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#其他)
 	- [1372.二叉树中的最长交错路径](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#1372二叉树中的最长交错路径)
 	- [863.二叉树中所有距离为 K 的结点](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#863二叉树中所有距离为-K-的结点)
+	- [98.验证二叉搜索树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#98验证二叉搜索树)
 
 ## 前中后序遍历
 
@@ -327,5 +328,33 @@ var distanceK = function (root, target, k) {
     findNode(targetNode, k)
   }
   return ans
+}
+```
+#### [98.验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)
+```javascript
+var isValidBST = function (root) {
+  // 二叉搜索树的中序遍历是递增的
+  // 此题可简化为求中序遍历结果，并在遍历过程中判断是否递增
+  // 中序遍历有多种写法，这边是迭代写法
+  if (!root) return false
+  let stack = [root]
+  let left = root.left
+  while(left){
+    stack.push(left)
+    left = left.left
+  }
+  let pre = -Infinity
+  while(stack.length){
+    let cur = stack.pop()
+    // 如果非递增，直接返回false
+    if(pre > cur.val) return false
+    pre = cur.val
+    let right = cur.right
+    while(right){
+      stack.push(right)
+      right = right.left
+    }
+  }
+  return true
 }
 ```
