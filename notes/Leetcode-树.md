@@ -359,7 +359,7 @@ var isValidBST = function (root) {
   return true
 }
 ```
-#### [99. 恢复二叉搜索树](https://leetcode-cn.com/problems/recover-binary-search-tree/)
+#### [99.恢复二叉搜索树](https://leetcode-cn.com/problems/recover-binary-search-tree/)
 ```javascript
 var recoverTree = function(root) {
   // 题目思路：中序遍历过程中交换错误节点
