@@ -15,7 +15,7 @@
 	- [剑指 Offer 34. 二叉树中和为某一值的路径](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#剑指-Offer-34二叉树中和为某一值的路径)
 - [其他](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#其他)
 	- [1372.二叉树中的最长交错路径](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#1372二叉树中的最长交错路径)
-	- [863.二叉树中所有距离为 K 的结点](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#863二叉树中所有距离为 K 的结点)
+	- [863.二叉树中所有距离为 K 的结点](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#863二叉树中所有距离为K的结点)
 
 ## 前中后序遍历
 
