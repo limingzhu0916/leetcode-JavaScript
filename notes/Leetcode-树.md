@@ -8,11 +8,18 @@
 	- [106.从中序与后序遍历序列构造二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#106从中序与后序遍历序列构造二叉树)
 	- [889.根据前序和后序遍历构造二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#889根据前序和后序遍历构造二叉树)
 - [BFS遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#BFS遍历)
+	- [102.二叉树的层序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#102二叉树的层序遍历)
 	- [513.找树左下角的值](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#513找树左下角的值)
 	- [116.填充每个节点的下一个右侧节点指针](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#116填充每个节点的下一个右侧节点指针)
 - [DFS遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#DFS遍历)
 	- [104.二叉树的最大深度](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#104二叉树的最大深度)
 	- [剑指 Offer 34. 二叉树中和为某一值的路径](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#剑指-Offer-34二叉树中和为某一值的路径)
+- [二叉树与链表](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#二叉树与链表)
+	- [116.填充每个节点的下一个右侧节点指针](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#116填充每个节点的下一个右侧节点指针)
+	- [117.填充每个节点的下一个右侧节点指针 II](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#117填充每个节点的下一个右侧节点指针II)
+- [序列化与反序列化](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#序列化与反序列化)
+	- [449.序列化和反序列化二叉搜索树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#449序列化和反序列化二叉搜索树)
+	- [297.二叉树的序列化与反序列化](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#297二叉树的序列化与反序列化)
 - [其他](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#其他)
 	- [1372.二叉树中的最长交错路径](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#1372二叉树中的最长交错路径)
 	- [863.二叉树中所有距离为 K 的结点](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#863二叉树中所有距离为-K-的结点)
@@ -209,6 +216,25 @@ var constructFromPrePost = function (pre, post) {
 };
 ```
 ## BFS遍历
+#### [102.二叉树的层序遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
+```javascript
+var levelOrder = function (root) {
+    if (!root) return []
+    let ans = []
+    let queue = [root]
+    while(queue.length){
+        let queueLen = queue.length
+        ans.push([])
+        for(let i = 0; i< queueLen; i++){
+            let cur = queue.shift()
+            ans[ans.length-1].push(cur.val)
+            if(cur.left) queue.push(cur.left)
+            if(cur.right) queue.push(cur.right)
+        }
+    }
+    return ans
+}
+```
 #### [513.找树左下角的值](https://leetcode-cn.com/problems/find-bottom-left-tree-value/)
 ```javascript
 var findBottomLeftValue = function (root) {
@@ -326,6 +352,121 @@ var pathSum = function (root, target) {
     let ans = [], path = []
     dfs(root, target, path, ans)
     return ans
+}
+```
+## 二叉树与链表
+#### [116.填充每个节点的下一个右侧节点指针](https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node/)
+```javascript
+var connect = function (root) {
+    if (!root) return null
+
+    let last = null
+    let startNode = null
+    const handle = (node) => {
+        if (last) {
+            last.next = node
+        }
+        if (!startNode) {
+            startNode = node
+        }
+        last = node
+    }
+
+    let start = root
+    while (start) {
+        startNode = null
+        last = null
+        for (let p = start; p != null; p = p.next) {
+            if (p.left) {
+                handle(p.left)
+                handle(p.right)
+            }
+        }
+        start = startNode
+    }
+    return root
+}
+```
+#### [117.填充每个节点的下一个右侧节点指针II](https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node-ii/)
+```javascript
+var connect = function (root) {
+    if (!root) return null
+    let queue = [root]
+    let queueLen = null
+    let last = null
+    while (queue.length) {
+        queueLen = queue.length
+        for (let i = 0; i < queueLen; i++) {
+            let cur = queue.shift()
+            if(cur.left) queue.push(cur.left)
+            if(cur.right) queue.push(cur.right)
+            if(i) last.next = cur
+            last = cur
+        }
+    }
+    return root
+}
+```
+## 序列化与反序列化
+#### [449.序列化和反序列化二叉搜索树](https://leetcode-cn.com/problems/serialize-and-deserialize-bst/)
+```javascript
+var serialize = function (root) {
+    // 后序遍历
+    // 递归写法
+    if (!root) return ''
+    let ans = []
+    const postTraversal = (root, ans) => {
+        if (!root) return
+        postTraversal(root.left, ans)
+        postTraversal(root.right, ans)
+        ans.push(root.val)
+    }
+    postTraversal(root, ans)
+    return ans.join(',')
+}
+
+var deserialize = function (data) {
+    if (data.length == 0) return null
+    post = data.split(',').map(item => Number.parseInt(item))
+    let inorder = [...post].sort((a, b) => a - b)
+    // 从后序和中序遍历恢复树结构
+    let m = new Map()
+    for (let i = 0; i < inorder.length; i++) {
+        m.set(inorder[i], i)
+    }
+    const buildTree = (i_start, i_end, p_start, p_end) => {
+        if (i_start > i_end) return null
+        const root = new TreeNode(post[p_end])
+        const mid = m.get(post[p_end])
+        const leftNum = mid - i_start
+        root.left = buildTree(i_start, mid - 1, p_start, p_start + leftNum - 1)
+        root.right = buildTree(mid + 1, i_end, p_start + leftNum, p_end - 1)
+        return root
+    }
+    return buildTree(0, inorder.length - 1, 0, post.length - 1)
+}
+```
+#### [297.二叉树的序列化与反序列化](https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/)
+```javascript
+var serialize = function(root) {
+    if(!root) return 'X'
+    const left = serialize(root.left)
+    const right = serialize(root.right)
+    return root.val + ',' + left + ',' + right
+}
+
+var deserialize = function(data) {
+    if(data.lenght == 0) return null
+    data = data.split(',')
+    const buildTree = (data) => {
+        let cur = data.shift()
+        if(cur === 'X') return null
+        const root = new TreeNode(cur)
+        root.left = buildTree(data)
+        root.right = buildTree(data)
+        return root
+    }
+    return buildTree(data)
 }
 ```
 ## 其他
