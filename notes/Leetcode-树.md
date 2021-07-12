@@ -3,10 +3,10 @@
 	 - [144.二叉树的前序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#144二叉树的前序遍历)
 	 - [145.二叉树的后序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#145二叉树的后序遍历)
 	 - [94.二叉树的中序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#94二叉树的中序遍历)
-- 序列化
-	- 105.从前序与中序遍历序列构造二叉树
-	- 106.从中序与后序遍历序列构造二叉树
-	- 889.根据前序和后序遍历构造二叉树
+- 序列化构造二叉树
+	- [105.从前序与中序遍历序列构造二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#105从前序与中序遍历序列构造二叉树)
+	- [106.从中序与后序遍历序列构造二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#106从中序与后序遍历序列构造二叉树)
+	- [889.根据前序和后序遍历构造二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#889根据前序和后序遍历构造二叉树)
 - [BFS遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#BFS遍历)
 	- [513.找树左下角的值](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#513找树左下角的值)
 	- [116.填充每个节点的下一个右侧节点指针](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#116填充每个节点的下一个右侧节点指针)
@@ -141,6 +141,72 @@ var inorderTraversal = function (root) {
   inorder(root, ans)
   return ans
 }
+```
+## 序列化构造二叉树
+#### [105.从前序与中序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
+```javascript
+var buildTree = function (preorder, inorder) {
+    if (!preorder.length) return null
+	// 使用map存储，方便查找
+    let m = new Map()
+    for (let i = 0; i < inorder.length; i++) {
+        m.set(inorder[i], i)
+    }
+    const handle = (p_start, p_end, i_start, i_end) => {
+        if (p_end < p_start) return null
+        const root = new TreeNode(preorder[p_start])
+        const mid = m.get(preorder[p_start])
+        let leftNum = mid - i_start
+        root.left = handle(p_start + 1, p_start + leftNum, i_start, mid - 1)
+        root.right = handle(p_start + leftNum + 1, p_end, mid + 1, i_end)
+        return root
+    }
+
+    return handle(0, preorder.length - 1, 0, inorder.length - 1)
+}
+```
+#### [106.从中序与后序遍历序列构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/)
+```javascript
+var buildTree = function (inorder, postorder) {
+    if (!inorder.length) return null
+
+    let m = new Map()
+    for (let i = 0; i < inorder.length; i++) {
+        m.set(inorder[i], i)
+    }
+
+    const handle = (i_start, i_end, p_start, p_end) => {
+        if (p_start > p_end) return null
+        const root = new TreeNode(postorder[p_end])
+        const mid = m.get(postorder[p_end])
+        const leftNum = mid - i_start
+        root.left = handle(i_start, mid - 1, p_start, p_start + leftNum - 1)
+        root.right = handle(mid + 1, i_end, p_start + leftNum, p_end - 1)
+        return root
+    }
+    return handle(0, inorder.length - 1, 0, postorder.length - 1)
+};
+```
+#### [889.根据前序和后序遍历构造二叉树](https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-postorder-traversal/)
+```javascript
+var constructFromPrePost = function (pre, post) {
+    if (!pre.length) return null
+    let m = new Map()
+    for (let i = 0; i < post.length; i++) {
+        m.set(post[i], i)
+    }
+
+    const handle = (pre_start, pre_end, post_start, post_end) => {
+        if (pre_start > pre_end) return null
+        const root = new TreeNode(pre[pre_start])
+        if (pre_start == pre_end) return root
+        const leftNum = m.get(pre[pre_start + 1]) - post_start
+        root.left = handle(pre_start + 1, pre_start + 1 + leftNum, post_start, post_start + leftNum)
+        root.right = handle(pre_start + 2 + leftNum, pre_end, post_start + leftNum + 1, post_end - 1)
+        return root
+    }
+    return handle(0, pre.length - 1, 0, post.length - 1)
+};
 ```
 ## BFS遍历
 #### [513.找树左下角的值](https://leetcode-cn.com/problems/find-bottom-left-tree-value/)
