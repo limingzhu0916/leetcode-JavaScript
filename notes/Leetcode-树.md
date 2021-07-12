@@ -7,6 +7,7 @@
 	- [105.从前序与中序遍历序列构造二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#105从前序与中序遍历序列构造二叉树)
 	- [106.从中序与后序遍历序列构造二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#106从中序与后序遍历序列构造二叉树)
 	- [889.根据前序和后序遍历构造二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#889根据前序和后序遍历构造二叉树)
+	- [1008.前序遍历构造二叉搜索树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#1008前序遍历构造二叉搜索树)
 - [BFS遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#BFS遍历)
 	- [102.二叉树的层序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#102二叉树的层序遍历)
 	- [513.找树左下角的值](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#513找树左下角的值)
@@ -214,6 +215,30 @@ var constructFromPrePost = function (pre, post) {
     }
     return handle(0, pre.length - 1, 0, post.length - 1)
 };
+```
+#### [1008.前序遍历构造二叉搜索树](https://leetcode-cn.com/problems/construct-binary-search-tree-from-preorder-traversal/)
+```javascript
+var bstFromPreorder = function (preorder) {
+  const bulid = function (start, end) {
+    if (start > end) return null
+    const node = new TreeNode(preorder[start])
+    if (start == end) return node
+    // 比根节点大的值为右节点
+    let left = end
+    for (let i = start + 1; i <= end; i++) {
+      if (preorder[start] < preorder[i]) {
+        // 找到右节点的起始位置，就可以退出循环
+        left = i - 1
+        break
+      }
+    }
+    // 继续递归
+    node.left = bulid(start + 1, left)
+    node.right = bulid(left + 1, end)
+    return node
+  }
+  return bulid(0, preorder.length - 1)
+}
 ```
 ## BFS遍历
 #### [102.二叉树的层序遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)
