@@ -3,7 +3,7 @@
 	 - [144.二叉树的前序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#144二叉树的前序遍历)
 	 - [145.二叉树的后序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#145二叉树的后序遍历)
 	 - [94.二叉树的中序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#94二叉树的中序遍历)
-- 序列化构造二叉树
+- [序列化构造二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#序列化构造二叉树)
 	- [105.从前序与中序遍历序列构造二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#105从前序与中序遍历序列构造二叉树)
 	- [106.从中序与后序遍历序列构造二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#106从中序与后序遍历序列构造二叉树)
 	- [889.根据前序和后序遍历构造二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#889根据前序和后序遍历构造二叉树)
