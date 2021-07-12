@@ -26,6 +26,8 @@
 	- [863.二叉树中所有距离为 K 的结点](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#863二叉树中所有距离为-K-的结点)
 	- [98.验证二叉搜索树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#98验证二叉搜索树)
 	- [99.恢复二叉搜索树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#99恢复二叉搜索树)
+	- [814.二叉树剪枝](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#814二叉树剪枝)
+	- [1325.删除给定值的叶子节点](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#1325删除给定值的叶子节点)
 
 ## 前中后序遍历
 
@@ -632,4 +634,48 @@ var recoverTree = function(root) {
   swap(x, y)
   return root
 }
+```
+#### [814.二叉树剪枝](https://leetcode-cn.com/problems/binary-tree-pruning/)
+```javascript
+var pruneTree = function(root) {
+  // 由于根节点可能被删除
+  // 因此需要一个虚拟节点指向根节点
+  let vnode = new TreeNode(-1)
+  vnode.left = root
+  // 后序遍历计算子树的和，删除子树和为0的节点
+  const dfs = function (root){
+    if(!root) return 0
+    const l = dfs(root.left)
+    const r = dfs(root.right)
+    if(l == 0) root.left = null
+    if(r == 0) root.right = null
+    return root.val + l + r
+  }
+  dfs(vnode)
+  return vnode.left
+}
+```
+#### [1325.删除给定值的叶子节点](https://leetcode-cn.com/problems/delete-leaves-with-a-given-value/)
+```javascript
+  // 删除节点需要用到节点的父节点
+  // 所以创建一个虚拟节点指向根节点，这样就能操作到根节点
+  let vnode = new TreeNode(-1)
+  vnode.left = root
+  // 设置一个参数parent纪录当前节点的父节点，便于删除
+  const dfs = function (root, parent, isLeft = true) {
+    if (!root) return
+    // 采用后序遍历方便查找
+    dfs(root.left, root, true)
+    dfs(root.right, root, false)
+    // 叶子节点的左右都是null
+    if(root.val == target && root.left == null && root.right == null){
+      if(isLeft){
+        parent.left = null
+      }else{
+        parent.right = null
+      }
+    }
+  }
+  dfs(root, vnode)
+  return vnode.left
 ```
