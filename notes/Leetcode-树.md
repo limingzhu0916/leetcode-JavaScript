@@ -8,6 +8,7 @@
 	- [106.从中序与后序遍历序列构造二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#106从中序与后序遍历序列构造二叉树)
 	- [889.根据前序和后序遍历构造二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#889根据前序和后序遍历构造二叉树)
 	- [1008.前序遍历构造二叉搜索树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#1008前序遍历构造二叉搜索树)
+	- [654.最大二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#654最大二叉树)
 - [BFS遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#BFS遍历)
 	- [102.二叉树的层序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#102二叉树的层序遍历)
 	- [513.找树左下角的值](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#513找树左下角的值)
@@ -240,6 +241,28 @@ var bstFromPreorder = function (preorder) {
     return node
   }
   return bulid(0, preorder.length - 1)
+}
+```
+#### [654.最大二叉树](https://leetcode-cn.com/problems/maximum-binary-tree/)
+```javascript
+var constructMaximumBinaryTree = function (nums) {
+  const buildTree = function (start, end) {
+    if (start > end) return null
+    // 找到最大值
+    let max = -Infinity
+    let index = 0
+    for (let i = start; i <= end; i++) {
+      if (nums[i] > max) {
+        max = nums[i]
+        index = i
+      }
+    }
+    const root = new TreeNode(max)
+    root.left = buildTree(start, index - 1)
+    root.right = buildTree(index + 1, end)
+    return root
+  }
+  return buildTree(0, nums.length - 1)
 }
 ```
 ## BFS遍历
