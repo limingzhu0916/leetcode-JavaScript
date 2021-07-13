@@ -13,6 +13,7 @@
 	- [102.二叉树的层序遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#102二叉树的层序遍历)
 	- [513.找树左下角的值](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#513找树左下角的值)
 	- [116.填充每个节点的下一个右侧节点指针](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#116填充每个节点的下一个右侧节点指针)
+	- [662.二叉树最大宽度](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#662二叉树最大宽度)
 - [DFS遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#DFS遍历)
 	- [104.二叉树的最大深度](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#104二叉树的最大深度)
 	- [剑指 Offer 34. 二叉树中和为某一值的路径](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#剑指-Offer-34二叉树中和为某一值的路径)
@@ -357,6 +358,34 @@ var connect = function (root) {
         start = startNode
     }
     return root
+}
+```
+#### [662.二叉树最大宽度](https://leetcode-cn.com/problems/maximum-width-of-binary-tree/)
+```javascript
+var widthOfBinaryTree = function (root) {
+  let queue = [root]
+  let pos = [1]
+  let left = right = ans = 0
+  while (queue.length) {
+    const queueLen = queue.length
+    if (queueLen == 1) pos = [1]
+    for (let i = 0; i < queueLen; i++) {
+      let cur = queue.shift()
+      let dis = pos.shift()
+      if (cur.left) {
+        queue.push(cur.left)
+        pos.push(2 * dis)
+      }
+      if (cur.right) {
+        queue.push(cur.right)
+        pos.push(2 * dis + 1)
+      }
+      if (i == 0) left = dis
+      if (i == queueLen - 1) right = dis
+    }
+    ans = Math.max(right - left + 1, ans)
+  }
+  return ans
 }
 ```
 ## DFS遍历
