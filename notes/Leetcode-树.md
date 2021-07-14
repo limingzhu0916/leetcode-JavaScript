@@ -31,6 +31,7 @@
 	- [814.二叉树剪枝](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#814二叉树剪枝)
 	- [1325.删除给定值的叶子节点](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#1325删除给定值的叶子节点)
 	- [1530.好叶子节点对的数量](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#1530好叶子节点对的数量)
+	- [894.所有可能的满二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#894所有可能的满二叉树)
 
 ## 前中后序遍历
 
@@ -733,8 +734,7 @@ var pruneTree = function(root) {
   return vnode.left
 ```
 #### [1530.好叶子节点对的数量](https://leetcode-cn.com/problems/number-of-good-leaf-nodes-pairs/)
-解题关键：两个叶子节点的最短路径 = 其中一个叶子节点到最近公共祖先的距离 + 另外一个叶子节点到最近公共祖先的距离
-而父到各个叶子节点的距离就是父节点到子节点的距离（1） + 子节点到各个叶子节点的距离
+解题关键：两个叶子节点的最短路径 = 其中一个叶子节点到最近公共祖先的距离 + 另外一个叶子节点到最近公共祖先的距离，而父到各个叶子节点的距离就是父节点到子节点的距离（1） + 子节点到各个叶子节点的距离
 ```javascript
 var countPairs = function (root, distance) {
   let ans = 0
@@ -756,5 +756,32 @@ var countPairs = function (root, distance) {
   }
   dfs(root)
   return ans
+}
+```
+#### [894.所有可能的满二叉树](https://leetcode-cn.com/problems/all-possible-full-binary-trees/)
+```javascript
+var allPossibleFBT = function (N) {
+  // 若只有一个节点
+  if (N == 1) return [new TreeNode(0)]
+  // 节点必须是偶数
+  if (N % 2 == 0) return []
+  let ans = []
+  let m = new Map()
+  for(let i = 1; i < N; i=i+2){
+    // 若为左边分配i个节点，则右边剩N-1-i，1为根节点
+    let j = N - 1 - i
+    const leftNodes = allPossibleFBT(i)
+    const rightNodes = allPossibleFBT(j)
+    for(let left of leftNodes){
+      for(let right of rightNodes){
+        const root = new TreeNode(0)
+        root.left = left
+        root.right = right
+        ans.push(root)
+      }
+    }
+    m.set(N, ans)
+  }
+  return m.get(N)
 }
 ```
