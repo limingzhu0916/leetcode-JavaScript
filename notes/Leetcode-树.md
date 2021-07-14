@@ -30,6 +30,7 @@
 	- [99.恢复二叉搜索树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#99恢复二叉搜索树)
 	- [814.二叉树剪枝](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#814二叉树剪枝)
 	- [1325.删除给定值的叶子节点](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#1325删除给定值的叶子节点)
+	- [1530.好叶子节点对的数量](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#1530好叶子节点对的数量)
 
 ## 前中后序遍历
 
@@ -730,4 +731,30 @@ var pruneTree = function(root) {
   }
   dfs(root, vnode)
   return vnode.left
+```
+#### [1530.好叶子节点对的数量](https://leetcode-cn.com/problems/number-of-good-leaf-nodes-pairs/)
+解题关键：两个叶子节点的最短路径 = 其中一个叶子节点到最近公共祖先的距离 + 另外一个叶子节点到最近公共祖先的距离
+而父到各个叶子节点的距离就是父节点到子节点的距离（1） + 子节点到各个叶子节点的距离
+```javascript
+var countPairs = function (root, distance) {
+  let ans = 0
+  const dfs = function (root) {
+    if (!root) return []
+    if (!root.left && !root.right) {
+      return [0]
+    }
+    let ls = [...dfs(root.left)].map(item => item + 1)
+    let rs = [...dfs(root.right)].map(item => item + 1)
+    for (let l of ls) {
+      for (let r of rs) {
+        if (l + r <= distance) {
+          ans += 1
+        }
+      }
+    }
+    return [...ls, ...rs]
+  }
+  dfs(root)
+  return ans
+}
 ```
