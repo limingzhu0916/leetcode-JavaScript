@@ -16,6 +16,7 @@
 	- [662.二叉树最大宽度](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#662二叉树最大宽度)
 - [DFS遍历](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#DFS遍历)
 	- [104.二叉树的最大深度](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#104二叉树的最大深度)
+	- [剑指Offer55-I.二叉树的深度](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#剑指Offer55-I二叉树的深度)
 	- [剑指 Offer 34. 二叉树中和为某一值的路径](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#剑指-Offer-34二叉树中和为某一值的路径)
 - [二叉树与链表](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#二叉树与链表)
 	- [116.填充每个节点的下一个右侧节点指针](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#116填充每个节点的下一个右侧节点指针)
@@ -409,6 +410,17 @@ var maxDepth = function (root) {
   }
   return depth
 }
+```
+#### [剑指Offer55-I.二叉树的深度](https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/)
+题目和上一题一样，本题补充了另一种写法
+```javascript
+var maxDepth = function (root) {
+  // 递归
+  if (!root) return 0
+  const l = maxDepth(root.left)
+  const r = maxDepth(root.right)
+  return Math.max(l + 1, r + 1)
+};
 ```
 #### [剑指 Offer 34. 二叉树中和为某一值的路径](https://leetcode-cn.com/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/)
 前序遍历+回溯
