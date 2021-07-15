@@ -34,6 +34,7 @@
 	- [1530.好叶子节点对的数量](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#1530好叶子节点对的数量)
 	- [894.所有可能的满二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#894所有可能的满二叉树)
 	- [101.对称二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#101对称二叉树)
+	- [226.翻转二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#226翻转二叉树)
 
 ## 前中后序遍历
 
@@ -844,4 +845,25 @@ var isSymmetric = function (root) {
   }
   return check(root.left, root.right)
 };
+```
+#### [226.翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/)
+```javascript
+var invertTree = function(root) {
+  if(!root) return null
+  const reverse = function (root) {
+    // 递归终止条件，如果左右都为空，直接返回根节点
+    if(!root.left && !root.right){
+      return root
+    }
+    // 只要左右都不为空，就可以进行值交换
+    let temp = root.left
+    root.left = root.right
+    root.right = temp
+    // 如果存在，就可以交换
+    if(root.left) reverse(root.left)
+    if(root.right) reverse(root.right)
+    return root
+  }
+  return reverse(root)
+}
 ```
