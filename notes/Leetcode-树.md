@@ -33,6 +33,7 @@
 	- [1325.删除给定值的叶子节点](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#1325删除给定值的叶子节点)
 	- [1530.好叶子节点对的数量](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#1530好叶子节点对的数量)
 	- [894.所有可能的满二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#894所有可能的满二叉树)
+	- [101.对称二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#101对称二叉树)
 
 ## 前中后序遍历
 
@@ -796,4 +797,51 @@ var allPossibleFBT = function (N) {
   }
   return m.get(N)
 }
+```
+#### [101.对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/)
+迭代写法
+```javascript
+var isSymmetric = function (root) {
+  // BFS
+  if (!root) return true
+  // 左右子树直接入队
+  let queue = [root.left, root.right]
+  while (queue.length) {
+    let queueLen = queue.length
+    for (let i = 0; i < queueLen; i = i + 2) {
+      let left = queue.shift()
+      let right = queue.shift()
+      // 当一边存在，另一边不存在，直接返回false
+      if ((!left && right) || (left && !right)) return false
+      if (left && right) {
+        // 如果左右都存在，但是值不相等，直接返回false
+        if (left.val !== right.val){
+          return false
+        }
+        // 值相等，就继续遍历下一层
+        queue.push(left.left, right.right)
+        queue.push(left.right, right.left)
+      }
+    }
+  }
+  return true
+};
+```
+递归写法
+```javascript
+var isSymmetric = function (root) {
+  // 递归
+  if (!root) return true
+  const check = function (left, right) {
+    // 递归终止条件,左右子树都是空，则对称
+    if (!left && !right) return true
+    // left和right都不为空
+    if(left && right){
+      // 则判断值是否相等，且左右子树是否相等
+      return left.val == right.val && check(left.left, right.right) && check(left.right, right.left)
+    }
+    return false
+  }
+  return check(root.left, root.right)
+};
 ```
