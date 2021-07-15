@@ -35,6 +35,7 @@
 	- [894.所有可能的满二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#894所有可能的满二叉树)
 	- [101.对称二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#101对称二叉树)
 	- [226.翻转二叉树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#226翻转二叉树)
+	- [543.二叉树的直径](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-%E6%A0%91.md#543二叉树的直径)
 
 ## 前中后序遍历
 
@@ -865,5 +866,24 @@ var invertTree = function(root) {
     return root
   }
   return reverse(root)
+}
+```
+#### [543.二叉树的直径](https://leetcode-cn.com/problems/diameter-of-binary-tree/)
+```javascript
+var diameterOfBinaryTree = function (root) {
+  if (!root) return 0
+  let ans = 0
+  const dfs = function (root) {
+    // 递归终止条件
+    if (!root) return 0
+    const L = dfs(root.left)
+    const R = dfs(root.right)
+    // 因为最长直径不一定经过根节点，所以队每一个节点都计算左右子树的深度的和
+    ans = Math.max(ans, L + R)
+    // 返回左右子树深度的最大值
+    return Math.max(L, R) + 1
+  }
+  dfs(root)
+  return ans
 }
 ```
