@@ -5,6 +5,7 @@
 ## 数据结构
 * 链表
 * [树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-树.md)
+* [堆](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-堆.md)
 * 栈和队列
 * 哈希表
 * 字符串
