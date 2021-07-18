@@ -1,5 +1,5 @@
 ﻿# Leetcode 题解 - 堆
- 	- [1046.最后一块石头的重量](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-堆.md#前中后序遍历)
+* [1046.最后一块石头的重量](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-堆.md#前中后序遍历)
 
 #### [1046.最后一块石头的重量](https://leetcode-cn.com/problems/last-stone-weight/)
 sort函数 + 递归
