@@ -2,6 +2,7 @@
 * [232.用栈实现队列](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-栈和队列.md#232用栈实现队列)
 * [225.用队列实现栈](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-栈和队列.md#225用队列实现栈)
 * [155.最小栈](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-栈和队列.md#155最小栈)
+* [20.有效的括号](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-栈和队列.md#20有效的括号)
 
 #### [232.用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/)
 双栈
@@ -140,6 +141,26 @@ MinStack.prototype.top = function() {
 MinStack.prototype.getMin = function() {
     return this.minStack[this.minStack.length - 1]
 };
+```
+#### [20.有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
+```javascript
+var isValid = function(s) {
+  let stack = []
+  for (let c of s) {
+    if (c == '{') {
+      stack.push('}')
+    } else if (c == '[') {
+      stack.push(']')
+    } else if (c == '(') {
+      stack.push(')')
+    } else {
+      if(c != stack.pop()){
+        return false
+      }
+    }
+  }
+  return !stack.length
+}
 ```
 
 
