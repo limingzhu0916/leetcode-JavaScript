@@ -6,7 +6,7 @@
 * 链表
 * [树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-树.md)
 * [堆](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-堆.md)
-* 栈和队列
+* [栈和队列](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-栈和队列.md)
 * 哈希表
 * 字符串
 * 数组与矩阵
