@@ -3,6 +3,7 @@
 * [225.用队列实现栈](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-栈和队列.md#225用队列实现栈)
 * [155.最小栈](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-栈和队列.md#155最小栈)
 * [20.有效的括号](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-栈和队列.md#20有效的括号)
+* [739.每日温度](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-栈和队列.md#739每日温度)
 
 #### [232.用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/)
 双栈
@@ -162,5 +163,26 @@ var isValid = function(s) {
   return !stack.length
 }
 ```
-
+#### [739.每日温度](https://leetcode-cn.com/problems/daily-temperatures/)
+维护一个栈用于存放温度的索引
+```javascript
+var dailyTemperatures = function (temp) {
+  // stack用于存放温度值的索引
+  let stack = []
+  let res = new Array(temp.length).fill(0)
+  // 因为要计算等几天才会有更高的温度，所以从后往前遍历
+  for (let i = temp.length - 1; i >= 0; i--) {
+    while (stack.length && temp[i] >= temp[stack[stack.length - 1]]) {
+      // 如果当前遍历的温度比栈顶的高，则把栈顶的pop出去
+      stack.pop()
+    }
+    if (stack.length) {
+      // 栈顶的索引对应的温度，就是比当前遍历的温度更高的一个温度
+      res[i] = stack[stack.length - 1] - i
+    }
+    stack.push(i)
+  }
+  return res
+}
+```
 
