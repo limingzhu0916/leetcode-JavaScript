@@ -4,6 +4,7 @@
 * [155.最小栈](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-栈和队列.md#155最小栈)
 * [20.有效的括号](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-栈和队列.md#20有效的括号)
 * [739.每日温度](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-栈和队列.md#739每日温度)
+* [503.下一个更大元素II](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-栈和队列.md#503下一个更大元素II)
 
 #### [232.用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/)
 双栈
@@ -179,6 +180,27 @@ var dailyTemperatures = function (temp) {
     if (stack.length) {
       // 栈顶的索引对应的温度，就是比当前遍历的温度更高的一个温度
       res[i] = stack[stack.length - 1] - i
+    }
+    stack.push(i)
+  }
+  return res
+}
+```
+#### [503.下一个更大元素II](https://leetcode-cn.com/problems/next-greater-element-ii/)
+```javascript
+var nextGreaterElements = function (nums) {
+  const len = nums.length
+  let stack = []
+  let res = new Array(len).fill(-1)
+  // 由于要计算循环数组，一种方法是将其重复一次
+  for (let i = 0; i < len * 2; i++) {
+    // 因此求索引时需要除数组长度取余数
+    // 当前遍历的数大于栈顶的数时，弹出栈顶元素的索引，该索引对应的位置放入当前遍历的数
+    while (stack.length && nums[stack[stack.length - 1] % len] < nums[i % len]) {
+      let index = stack.pop()
+      if (index < len) {
+        res[index] = nums[i % len]
+      }
     }
     stack.push(i)
   }
