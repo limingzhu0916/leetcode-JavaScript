@@ -1,7 +1,7 @@
 # leetcode-JavaScript
 ## 前言
  leetcode题解，纪录自己的解题之路。<br>
- 题解按照数据结构与算法思想分类。
+ 不定时更新
 ## 数据结构
 * 链表
 * [树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-树.md)
