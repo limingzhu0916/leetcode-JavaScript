@@ -21,3 +21,5 @@
 * 搜索
 * 动态规划
 * 数学
+## 算法详解
+* [逆波兰表达式](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/逆波兰表达式求值题解.md)
