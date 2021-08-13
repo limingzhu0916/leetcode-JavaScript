@@ -3,7 +3,7 @@
  leetcode题解，纪录自己的解题之路。<br>
  不定时更新
 ## 数据结构
-* 链表
+* [链表](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-链表.md)
 * [树](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-树.md)
 * [堆](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-堆.md)
 * [栈和队列](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-栈和队列.md)
