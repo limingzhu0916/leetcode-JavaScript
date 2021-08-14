@@ -8,7 +8,7 @@
 * [堆](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-堆.md)
 * [栈和队列](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-栈和队列.md)
 * [哈希表](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-哈希表.md)
-* 字符串
+* [字符串](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-字符串.md)
 * 数组与矩阵
 * 图
 * 位运算
@@ -23,3 +23,4 @@
 * 数学
 ## 算法详解
 * [逆波兰表达式](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/逆波兰表达式求值题解.md)
+* [和为k的最长子数组](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/和为k的最长子数组.md)
