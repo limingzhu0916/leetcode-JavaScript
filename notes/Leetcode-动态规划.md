@@ -6,7 +6,7 @@
 - [矩阵](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#矩阵)
 	 - [221.最大正方形](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#221最大正方形)
 
-## * 斐波那契数列
+## 斐波那契数列
 #### [70.爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
 
 > 爬 n 阶楼梯，每次可以爬 1 或 2 个台阶。那么爬上n阶楼梯前，要么是在 n-1 阶楼梯上，要么是在 n-2 阶楼梯上。所以可以写出
@@ -101,7 +101,7 @@ var rob = function (nums) {
 };
 ```
 
-## * 矩阵
+## 矩阵
 #### [221.最大正方形](https://leetcode-cn.com/problems/maximal-square/)
 方法一：暴力求解
 ```javascript
