@@ -19,7 +19,7 @@
 * 二分查找
 * 分治
 * 搜索
-* 动态规划
+* [动态规划](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md)
 * 数学
 ## 算法详解
 * [逆波兰表达式](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/逆波兰表达式求值题解.md)
