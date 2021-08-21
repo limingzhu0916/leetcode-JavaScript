@@ -5,6 +5,12 @@
 	 - [213.打家劫舍II](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#213打家劫舍II)
 - [矩阵](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#矩阵)
 	 - [221.最大正方形](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#221最大正方形)
+	 - [64.最小路径和](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#64最小路径和)
+	 - [62.不同路径](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#62不同路径)
+- [数组区间](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#数组区间)
+	 - [413.等差数列划分](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#413等差数列划分)
+- [分割整数](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#分割整数)
+	 - [343.整数拆分](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#343整数拆分)
 
 ## 斐波那契数列
 #### [70.爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)
@@ -182,4 +188,109 @@ var maximalSquare = function (matrix) {
     }
     return res * res
 }
+```
+
+#### [64.最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)
+
+> 给定一个包含非负整数的 m x n 网格 grid ，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。
+
+矩阵中第一行的元素，只能是从左边走来
+矩阵中第一列的元素，只能是从上面走来
+而矩阵中的元素（除第一行、第一列）要么是从上面走下来，要么是从左边走过来。从哪边下来取决于哪边的值小。
+于是我们可以写出动态规划方程：
+i = 0时，dp(i, j) = dp(i - 1, j) + grid(i, j)
+j = 0时，dp(i, j) = dp(i, j - 1) + grid(i, j)
+i > 1, j > 1时，dp(i, j) = Math.min(dp(i - 1, j), dp(i, j - 1)) + grid(i, j)
+
+```javascript
+var minPathSum = function(grid) {
+    let row = grid.length
+    let col = grid[0].length
+    let dp = new Array(row).fill(0).map(() => new Array(col).fill(0))
+    dp[0][0] = grid[0][0]
+    for(let i = 0, j = 1; j < col; j++){
+        dp[i][j] = grid[i][j] + dp[i][j - 1]
+    }
+    for(let i = 1, j = 0; i < row; i++){
+        dp[i][j] = grid[i][j] + dp[i - 1][j]
+    }
+    for(let i = 1; i < row; i++){
+        for(let j = 1; j < col; j++){
+            dp[i][j] = grid[i][j] + Math.min(dp[i - 1][j], dp[i][j - 1])
+        }
+    }
+    return dp[row - 1][col - 1]
+};
+```
+#### [62.不同路径](https://leetcode-cn.com/problems/unique-paths/)
+
+> 一个机器人位于一个 m x n 网格的左上角。机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角。
+问总共有多少条不同的路径？
+
+思路与上一题很像，不同的是这题要统计路径总数。依旧可以分成三种情况
+* 当走在第一行的元素上时，只能是从左边走过来，所以第一行上的路径条数都是1
+* 当走在第一列的元素上时，只能是从上面走下来，所以第一列上的路径条数都是1
+* 当走到矩阵内部时，要么从上面走下来，要么从左边走过来，所以路径总数应该是上面元素的路径总数加上左边元素的路径总数
+
+因此，动态规划方程可以写为：
+i = 0时，dp(i, j) = 1
+j = 0时，dp(i, j) = 1
+i > 1, j > 1时，dp(i, j) = dp(i - 1, j) + dp(i, j - 1)
+```javascript
+var uniquePaths = function(m, n) {
+    let dp = new Array(m).fill(0).map(() => new Array(n).fill(0))
+    dp[0][0] = 1
+    for(let i = 0, j = 1; j < n; j++){
+        dp[i][j] = 1
+    }
+    for(let i = 1, j = 0; i < m; i++){
+        dp[i][j] = 1
+    }
+    for(let i = 1; i < m; i++){
+        for(let j = 1; j < n; j++){
+            dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
+        }
+    }
+    return dp[m - 1][n - 1]
+};
+```
+
+## 数组区间
+#### [413.等差数列划分](https://leetcode-cn.com/problems/arithmetic-slices/)
+
+> 如果一个数列 至少有三个元素 ，并且任意两个相邻元素之差相同，则称该数列为等差数列。给你一个整数数组 nums ，返回数组 nums 中所有为等差数组的 子数组 个数。
+
+等差数组满足 nums[i] - nums[i - 1] = nums[i - 1] - nums[i - 2]。如数组[1, 2, 3]为等差数组，子数组为1。当在其后面添加一个数字4。由于数字4满足等差数组公式，因此和数组[1, 2, 3]构成等差数组。
+子数组个数 = 数组[1, 2, 3]的子数组个数 + 添加4后增加的子数组数。
+添加4的子数组增加的子数组为 [2, 3, 4] 、[1, 2, 3, 4]
+因此可以定义动态规划方程为：
+满足nums[i] - nums[i - 1] = nums[i - 1] - nums[i - 2]时，dp[i] = dp[i - 1] + 1
+```javascript
+var numberOfArithmeticSlices = function(nums) {
+    if(nums.length < 3) return 0
+    let dp = new Array(nums.length).fill(0)
+    for(let i = 2; i < nums.length; i++){
+        if(nums[i - 1] - nums[i - 2] == nums[i] - nums[i - 1]){
+            dp[i] = dp[i - 1] + 1
+        }
+    }
+    return dp.reduce((prevalue, curvalue) => {
+        return curvalue + prevalue
+    })
+};
+```
+
+## 分割整数
+#### [343.整数拆分](https://leetcode-cn.com/problems/integer-break/)
+```javascript
+var integerBreak = function (n) {
+    let dp = new Array(n + 1).fill(0)
+    dp[2] = 1
+    for(let i = 3; i <= n; i++){
+        for(let j = 1; j < i; j++){
+            dp[i] = Math.max(dp[i], j * (i - j), j * dp[i - j])
+        }
+    }
+    return dp[n]
+};
 ```
