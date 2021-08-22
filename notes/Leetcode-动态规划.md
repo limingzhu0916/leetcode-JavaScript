@@ -1,6 +1,7 @@
 ﻿# Leetcode 题解 - 动态规划
  - [斐波那契数列](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#斐波那契数列)
 	 - [70.爬楼梯](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#70爬楼梯)
+	 - [爬楼梯扩展问题](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#爬楼梯扩展问题)
 	 - [198.打家劫舍](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#198打家劫舍)
 	 - [213.打家劫舍II](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#213打家劫舍II)
 - [矩阵](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#矩阵)
@@ -43,6 +44,30 @@ var climbStairs = function(n) {
     }
     return c
 };
+```
+#### [爬楼梯扩展问题](https://www.nowcoder.com/practice/22243d016f6b47f2a6928b4313c85387?tpId=13&tags=&title=&difficulty=0&judgeStatus=0&rp=1)
+
+> 一只青蛙一次可以跳上1级台阶，也可以跳上2级……它也可以跳上n级。求该青蛙跳上一个n级的台阶(n为正整数)总共有多少种跳法。
+
+假设青蛙在 n 级台阶，那么它可能是从 n - 1 级台阶上来的，也可能是 n - 2 级台阶上来的，或者 n - 3 级台阶.......，或者 0 级台阶上来的。
+于是可以写出动态规划方程：
+f(n) = f(n - 1) + f(n - 2) + ····· + f(0) 
+继续观察可以发现：
+f(n - 1) = f(n - 2) + f(n - 3) + ····· + f(0) 
+也就是说 f(n) = f(n - 1)  + f(n - 1) = 2 * f(n - 1)
+
+```javascript
+function jumpFloorII(number){
+    // write code here
+    let pre = 1
+    let ans
+    for(let i = 2; i <= number; i++){
+    // 左移乘2
+        ans = pre << 1
+        pre = ans
+    }
+    return pre
+}
 ```
 #### [198.打家劫舍](https://leetcode-cn.com/problems/house-robber/)
 
