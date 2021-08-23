@@ -10,6 +10,8 @@
 	 - [62.不同路径](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#62不同路径)
 - [数组区间](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#数组区间)
 	 - [413.等差数列划分](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#413等差数列划分)
+	 - [300.最长递增子序列](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#300最长递增子序列)
+	 - [354.俄罗斯套娃信封问题](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#354俄罗斯套娃信封问题)
 - [分割整数](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#分割整数)
 	 - [343.整数拆分](https://github.com/limingzhu0916/leetcode-JavaScript/blob/main/notes/Leetcode-动态规划.md#343整数拆分)
 
@@ -302,6 +304,48 @@ var numberOfArithmeticSlices = function(nums) {
     return dp.reduce((prevalue, curvalue) => {
         return curvalue + prevalue
     })
+};
+```
+#### [300.最长递增子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)
+```javascript
+var lengthOfLIS = function(nums) {
+    let dp = new Array(nums.length).fill(1)
+    for(let i = 0; i < nums.length; i++){
+        // 从 i 点往前统计有多少个小于nums[i]的值
+        for(let j = 0; j < i; j++){
+            if(nums[j] < nums[i]){
+                // 小于则将dp[j] + 1, 并与dp[i]相比取最大值
+                dp[i] = Math.max(dp[j] + 1, dp[i])
+            }
+        }
+    }
+    return Math.max(...dp)
+};
+```
+#### [354.俄罗斯套娃信封问题](https://leetcode-cn.com/problems/russian-doll-envelopes/)
+该问题可以简化为：
+* 将数组排序，0维度按升序排列，0维度相等按照降序排列。（由于0维度相等的数组只能取一个，所以降序排列是为了第二步不出问题）
+* 对排序后的数组求最长递增子序列（也就是上一题的思路）
+```javascript
+var maxEnvelopes = function (envelopes) {
+    // 对数组排序，0维度按升序排列，0维度相等按照降序排列
+    envelopes.sort((a, b) => {
+        if (a[0] == b[0]) {
+            return b[1] - a[1]
+        }else{
+            return a[0] - b[0]
+        }
+    })
+    // 求排序后数组的最长子序列
+    let dp = new Array(envelopes.length).fill(1)
+    for(let i = 0; i < envelopes.length; i++){
+        for(let j = 0; j < i; j++){
+            if(envelopes[j][1] < envelopes[i][1]){
+                dp[i] = Math.max(dp[i], dp[j] + 1)
+            }
+        }
+    }
+    return Math.max(...dp)
 };
 ```
 
